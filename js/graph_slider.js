@@ -193,7 +193,32 @@ d3.json(dataPath, function(error, graph) {
 		.data(['Degree Centrality', 'Betweenness Centrality', 'Eigenvector Centrality'])
 		.enter().append('option')
 		.attr('value', function(d) { return d.split(' ')[0].toLowerCase(); })
-		.text(function(d) { return d; });
+        .text(function(d) { return d; });
+        
+    var legend = d3.select('svg')
+        .append("g")
+        .selectAll("g")
+        .data(color.domain())
+        .enter()
+        .append('g')
+          .attr('class', 'legend')
+          .attr('transform', function(d, i) {
+            var height = legendRectSize;
+            var x = 0;
+            var y = i * height;
+            return 'translate(' + x + ',' + y + ')';
+        });
+    
+    legend.append('rect')
+        .attr('width', legendRectSize)
+        .attr('height', legendRectSize)
+        .style('fill', color)
+        .style('stroke', color);
+    
+    legend.append('text')
+        .attr('x', legendRectSize + legendSpacing)
+        .attr('y', legendRectSize - legendSpacing)
+        .text(function(d) { return d; });
 
 });
 
@@ -234,27 +259,3 @@ function searchNodes() {
 	d3.selectAll('.link').transition().duration(5000).style('stroke-opacity', '0.6');
 }
 
-var legend = d3.select('svg')
-    .append("g")
-    .selectAll("g")
-    .data(color.domain())
-    .enter()
-    .append('g')
-      .attr('class', 'legend')
-      .attr('transform', function(d, i) {
-        var height = legendRectSize;
-        var x = 0;
-        var y = i * height;
-        return 'translate(' + x + ',' + y + ')';
-    });
-
-legend.append('rect')
-    .attr('width', legendRectSize)
-    .attr('height', legendRectSize)
-    .style('fill', color)
-    .style('stroke', color);
-
-legend.append('text')
-    .attr('x', legendRectSize + legendSpacing)
-    .attr('y', legendRectSize - legendSpacing)
-    .text(function(d) { return d; });
