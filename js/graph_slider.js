@@ -107,12 +107,6 @@ d3.json(dataPath, function(error, graph) {
       .attr('x', 6)
       .attr('y', 3);
 
-      legend = svg.append("g")
-      .attr("class","legend")
-      .attr("transform","translate(50,30)")
-      .style("font-size","12px")
-      .call(d3.legend)
-
   node.append("title")
       .text(function(d) { return d.name; });
 
@@ -136,7 +130,7 @@ d3.json(dataPath, function(error, graph) {
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
 
-    legend = svg.append("g")
+    legend = node.append("g")
         .attr("class","legend")
         .attr("transform","translate(50,30)")
         .style("font-size","12px")
