@@ -28,35 +28,6 @@ var button = search.append('input')
 	.attr('value', 'Search')
     .on('click', function () { searchNodes(); });
 
-var legendRectSize = 100;
-car legendSpacing = 10;
-
-var legend = d3.select("body")
-        .append("svg")
-        .append("g")
-        .selectAll("g")
-        .data(color.domain())
-        .enter()
-        .append('g')
-          .attr('class', 'legend')
-          .attr('transform', function(d, i) {
-            var height = legendRectSize;
-            var x = 0;
-            var y = i * height;
-            return 'translate(' + x + ',' + y + ')';
-        });
-    
-legend.append('rect')
-        .attr('width', legendRectSize)
-        .attr('height', legendRectSize)
-        .style('fill', color)
-        .style('stroke', color);
-    
-legend.append('text')
-        .attr('x', legendRectSize + legendSpacing)
-        .attr('y', legendRectSize - legendSpacing)
-        .text(function(d) { return d; });
-
 // Toggle for ego networks on click (below).
 var toggle = 0;
 
@@ -160,6 +131,8 @@ d3.json(dataPath, function(error, graph) {
 
   }
 
+
+
   	// A slider that removes nodes below the input threshold.
 	var slider = d3.select('body').append('p').text('Edge Weight Threshold: ');
 
@@ -223,6 +196,48 @@ d3.json(dataPath, function(error, graph) {
 		.enter().append('option')
 		.attr('value', function(d) { return d.split(' ')[0].toLowerCase(); })
         .text(function(d) { return d; });   
+
+    var legend = d3.select("#legend")
+        .append("svg")
+        .attr("class", "legend")
+        .attr("width", 140)
+        .attr("height", 200)
+        .selectAll("g")
+        .data(color.domain())
+        .enter()
+        .append("g")
+        .attr("transform", function(d, i) {
+        return "translate(0," + i * 20 + ")";
+        });
+    
+    legend.append("rect")
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", color);
+    
+    var legendKeys = [];
+    var map = new Map();
+    for (var item of graph.nodes) {
+        if(!map.has(item.group)){
+            map.set(item.group, true);    // set any value to Map
+            legendKeys.push({
+                id: item.group,
+                groupName: item.data_legend
+            });
+        }
+    }
+
+    console.log(legendKeys);
+
+    legend.append("text")
+        .data(color.domain())
+        .attr("x", 24)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .text(function(d) {
+        return legendKeys.find(x => x.id === d).groupName;
+        })
+        .style('font-size', 10);
 
 });
 
