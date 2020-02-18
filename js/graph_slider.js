@@ -28,7 +28,7 @@ var button = search.append('input')
 	.attr('value', 'Search')
     .on('click', function () { searchNodes(); });
 
-var legend = container
+var legend = svg
         .append("g")
         .selectAll("g")
         .data(color.domain())
