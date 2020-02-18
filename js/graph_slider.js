@@ -107,8 +107,16 @@ d3.json(dataPath, function(error, graph) {
       .attr('x', 6)
       .attr('y', 3);
 
+      legend = svg.append("g")
+      .attr("class","legend")
+      .attr("transform","translate(50,30)")
+      .style("font-size","12px")
+      .call(d3.legend)
+
   node.append("title")
       .text(function(d) { return d.name; });
+
+  node.attr("data-legend", function(d) {return d.data_legend})
 
   simulation
       .nodes(graph.nodes)
@@ -127,6 +135,19 @@ d3.json(dataPath, function(error, graph) {
     node
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
+
+    legend = svg.append("g")
+        .attr("class","legend")
+        .attr("transform","translate(50,30)")
+        .style("font-size","12px")
+        .call(d3.legend)
+    
+    setTimeout(function() { 
+        legend
+          .style("font-size","20px")
+          .attr("data-style-padding",10)
+          .call(d3.legend)
+      },1000)
   }
 
   	// A slider that removes nodes below the input threshold.
