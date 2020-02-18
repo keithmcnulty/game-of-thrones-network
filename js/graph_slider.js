@@ -31,7 +31,7 @@ var button = search.append('input')
 var toggle = 0;
 
 
-d3.json("../json/got_network.json", function(error, graph) {
+d3.json("json/got_network.json", function(error, graph) {
   if (error) throw error;
 
   // Make object of all neighboring nodes.
