@@ -1,3 +1,6 @@
+Using Community Detection Algorithms in `igraph` on a Game of Thrones Dataset
+=============================================================================
+
 More and more I’ve been working in graphs. Graphs are particularly
 useful when you are analyzing connection and community, and can be an
 extremely efficient way to store data. Sometimes I’ll use a graph
