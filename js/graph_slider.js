@@ -28,7 +28,8 @@ var button = search.append('input')
 	.attr('value', 'Search')
     .on('click', function () { searchNodes(); });
 
-var legend = svg
+var legend = d3.select("body")
+        .append("svg")
         .append("g")
         .selectAll("g")
         .data(color.domain())
