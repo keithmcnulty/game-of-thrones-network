@@ -5,7 +5,7 @@
 (function() {
     d3.legend = function(g) {
       g.each(function() {
-        var g= d3.select(this),
+        var g = d3.select(this),
             items = {},
             svg = d3.select(g.property("nearestViewportElement")),
             legendPadding = g.attr("data-style-padding") || 5,
@@ -187,7 +187,7 @@ d3.json(dataPath, function(error, graph) {
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
 
-    legend = container.append("g")
+    legend = svg.append("g")
         .attr("class","legend")
         .attr("transform","translate(50,30)")
         .style("font-size","12px")
