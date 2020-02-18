@@ -171,7 +171,7 @@ d3.json("../json/got_network.json", function(error, graph) {
 
 		});
 
-	// A dropdown menu with two different centrality measures, calculated in R igraph.
+	// A dropdown menu with three different centrality measures, calculated in R igraph.
 	// Accounts for node collision.
 	var dropdown = d3.select('body').append('div')
 		.append('select')
@@ -187,7 +187,7 @@ d3.json("../json/got_network.json", function(error, graph) {
 		});
 
 	dropdown.selectAll('option')
-		.data(['Degree Centrality', 'Betweenness Centrality'])
+		.data(['Degree Centrality', 'Betweenness Centrality', 'Eigenvector Centrality'])
 		.enter().append('option')
 		.attr('value', function(d) { return d.split(' ')[0].toLowerCase(); })
 		.text(function(d) { return d; });
