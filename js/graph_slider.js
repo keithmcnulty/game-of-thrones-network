@@ -30,8 +30,9 @@ var button = search.append('input')
 // Toggle for ego networks on click (below).
 var toggle = 0;
 
+var dataPath = "https://keithmcnulty.github.io/game-of-thrones-network/json/got_network.json"
 
-d3.json("json/got_network.json", function(error, graph) {
+d3.json(dataPath, function(error, graph) {
   if (error) throw error;
 
   // Make object of all neighboring nodes.
