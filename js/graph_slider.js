@@ -187,18 +187,11 @@ d3.json(dataPath, function(error, graph) {
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
 
-    legend = svg.append("g")
+    var legend = svg.append("g")
         .attr("class","legend")
         .attr("transform","translate(50,30)")
         .style("font-size","12px")
         .call(d3.legend)
-    
-    setTimeout(function() { 
-        legend
-          .style("font-size","20px")
-          .attr("data-style-padding",10)
-          .call(d3.legend)
-      },1000)
   }
 
   	// A slider that removes nodes below the input threshold.
