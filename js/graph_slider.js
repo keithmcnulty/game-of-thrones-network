@@ -29,6 +29,7 @@ var button = search.append('input')
     .on('click', function () { searchNodes(); });
 
 var legendRectSize = 100;
+car legendSpacing = 10;
 
 var legend = d3.select("body")
         .append("svg")
