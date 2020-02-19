@@ -228,8 +228,6 @@ d3.json(dataPath, function(error, graph) {
         }
     }
 
-    console.log(legendNames);
-
     legend.append("text")
         .data(color.domain())
         .attr("x", 24)
@@ -239,6 +237,21 @@ d3.json(dataPath, function(error, graph) {
         return legendNames.find(x => x.id === d).groupName;
         })
         .style('font-size', 10);
+
+    var photos = legendNames.filter(x => x.groupName !== 'BLACK_JACK' && x.groupName !== 'BALON_DWARF');
+
+    var imgPath = 'https://keithmcnulty.github.io/game-of-thrones-network/img/';
+
+    for (var char in photos) {
+        if (node.name === char.groupName) {
+            node.append("svg:image")
+            .attr("xlink:href",  function(d) { return imgPath + d.name.toLowerCase() + '.jpeg';})
+            .attr("x", function(d) { return -25;})
+            .attr("y", function(d) { return -25;})
+            .attr("height", 50)
+            .attr("width", 50);
+        }
+    }
 
 });
 
