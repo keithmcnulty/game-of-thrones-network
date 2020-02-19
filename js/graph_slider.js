@@ -65,13 +65,13 @@ d3.json(dataPath, function(error, graph) {
       .style('stroke', d => color(d.group));
 
   var node = container.append("g")
-      .attr("class", "nodes")
+    .attr("class", "nodes")
     .selectAll("circle")
     .data(graph.nodes)
     .enter().append("circle")
     // Calculate degree centrality within JavaScript.
-    .attr("r", function(d, i) { count = 0; graph.links.forEach(function(l) { if (l.source == i || l.target == i) { count += 1;}; }); return count;})
-    // Use degree centrality from NetworkX in json.
+    // .attr("r", function(d, i) { count = 0; graph.links.forEach(function(l) { if (l.source == i || l.target == i) { count += 1;}; }); return count;})
+    // Use degree centrality from R igraph in json.
     .attr('r', function(d, i) { return degreeSize(d.degree); })
     // Color by group, a result of modularity calculation in R igraph.
       .attr("fill", function(d) { return color(d.group); })
@@ -101,15 +101,27 @@ d3.json(dataPath, function(error, graph) {
           .on("drag", dragged)
           .on("end", dragended));
 
-  var labels = node.append("text")
-      .text(function(d) {
-        return d.name;
-      })
-      .attr('x', 6)
-      .attr('y', 3);
+node.append("title")
+    .text(d => d.name);
 
-  node.append("title")
-      .text(function(d) { return d.name; });
+// MIKE why doesn't this display "Hello" on every node?
+node.append("text")
+    .text("Hello!")
+    .attr('x', d => d.x)
+    .attr('y', d => d.y);
+
+var imgPath = 'https://keithmcnulty.github.io/game-of-thrones-network/img/';
+
+// MIKE why doesn't an image display on every node?
+node.append("svg:image")
+    .attr("xlink:href", imgPath + 'jon' + '.png')
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("height", 200)
+    .attr("width",200);
+
+
+console.log(node);
 
   simulation
       .nodes(graph.nodes)
@@ -238,20 +250,17 @@ d3.json(dataPath, function(error, graph) {
         })
         .style('font-size', 10);
 
-    var photos = legendNames.filter(x => x.groupName !== 'BLACK_JACK' && x.groupName !== 'BALON_DWARF');
-
-    var imgPath = 'https://keithmcnulty.github.io/game-of-thrones-network/img/';
-
-    photos.forEach(d => {
-        var photoNodes = graph.nodes.filter(x => x.name === d.groupName);
-        photoNodes.forEach(k => node.append("svg:image")
-        .attr("xlink:href", imgPath + k.name.toLowerCase() + '.jpeg')
-        .attr("x", function(d) { return -25;})
-        .attr("y", function(d) { return -25;})
-        .attr("height", 50)
-        .attr("width", 50));
-
-    }) 
+    // var photos = legendNames.filter(x => x.groupName !== 'BLACK_JACK' && x.groupName !== 'BALON_DWARF');
+    
+    //photos.forEach(d => {
+    //    var photoNode = graph.nodes.filter(x => x.name === d.groupName);
+    // node.append("svg:image")
+    //     .attr("xlink:href", () => imgPath + 'jon' + '.png')
+    //     .attr("x", 0)
+    //     .attr("y", 0)
+    //     .attr("height", 200)
+    //     .attr("width",200);
+    //}) 
 
 });
 
