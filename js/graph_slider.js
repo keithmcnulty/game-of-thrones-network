@@ -242,16 +242,16 @@ d3.json(dataPath, function(error, graph) {
 
     var imgPath = 'https://keithmcnulty.github.io/game-of-thrones-network/img/';
 
-    // for (var char in photos) {
-    //     if (node.name === char.groupName) {
-    //         node.append("svg:image")
-    //         .attr("xlink:href",  function(d) { return imgPath + d.name.toLowerCase() + '.jpeg';})
-    //         .attr("x", function(d) { return -25;})
-    //         .attr("y", function(d) { return -25;})
-    //         .attr("height", 50)
-    //         .attr("width", 50);
-    //     }
-    // }
+    photos.forEach(d => {
+        var photoNodes = graph.nodes.filter(x => x.name === d.groupName);
+        photoNodes.forEach(k => node.append("svg:image")
+        .attr("xlink:href", imgPath + k.name + '.jpeg')
+        .attr("x", function(d) { return -25;})
+        .attr("y", function(d) { return -25;})
+        .attr("height", 50)
+        .attr("width", 50));
+
+    }) 
 
 });
 
