@@ -223,7 +223,7 @@ d3.json(dataPath, function(error, graph) {
             map.set(item.group, true);    // set any value to Map
             legendNames.push({
                 id: item.group,
-                groupName: item.data_legend
+                groupName: item.legend_label
             });
         }
     }
