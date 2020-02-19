@@ -245,7 +245,7 @@ d3.json(dataPath, function(error, graph) {
     photos.forEach(d => {
         var photoNodes = graph.nodes.filter(x => x.name === d.groupName);
         photoNodes.forEach(k => node.append("svg:image")
-        .attr("xlink:href", imgPath + k.name + '.jpeg')
+        .attr("xlink:href", imgPath + k.name.toLowerCase() + '.jpeg')
         .attr("x", function(d) { return -25;})
         .attr("y", function(d) { return -25;})
         .attr("height", 50)
