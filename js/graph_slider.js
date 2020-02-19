@@ -196,7 +196,8 @@ d3.json(dataPath, function(error, graph) {
 		.enter().append('option')
 		.attr('value', function(d) { return d.split(' ')[0].toLowerCase(); })
         .text(function(d) { return d; });   
-
+    
+    // add a legend
     var legend = d3.select("#legend")
         .append("svg")
         .attr("class", "legend")
@@ -215,19 +216,19 @@ d3.json(dataPath, function(error, graph) {
         .attr("height", 18)
         .style("fill", color);
     
-    var legendKeys = [];
+    var legendNames = [];
     var map = new Map();
     for (var item of graph.nodes) {
         if(!map.has(item.group)){
             map.set(item.group, true);    // set any value to Map
-            legendKeys.push({
+            legendNames.push({
                 id: item.group,
                 groupName: item.data_legend
             });
         }
     }
 
-    console.log(legendKeys);
+    console.log(legendNames);
 
     legend.append("text")
         .data(color.domain())
@@ -235,7 +236,7 @@ d3.json(dataPath, function(error, graph) {
         .attr("y", 9)
         .attr("dy", ".35em")
         .text(function(d) {
-        return legendKeys.find(x => x.id === d).groupName;
+        return legendNames.find(x => x.id === d).groupName;
         })
         .style('font-size', 10);
 
