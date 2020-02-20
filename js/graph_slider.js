@@ -237,6 +237,8 @@ node.append("title")
 
     var photos = legendNames.filter(x => x.groupName !== 'BLACK_JACK' && x.groupName !== 'BALON_DWARF');
 
+    console.log(photos);
+
     var imgPath = 'https://keithmcnulty.github.io/game-of-thrones-network/img/'
     
    photos.forEach(d => {
@@ -251,8 +253,6 @@ node.append("title")
             .attr('height', d => degreeSize(d.degree) * 2)
             .attr('width', d => degreeSize(d.degree) * 2)
             .append("image")
-            .attr('x', -degreeSize(d.degree))
-            .attr('y', -degreeSize(d.degree))
             .attr('height', d => degreeSize(d.degree) * 2)
             .attr('width', d => degreeSize(d.degree) * 2)
             .attr('xlink:href', d => imgPath + d.name.toLowerCase() + '.png');
