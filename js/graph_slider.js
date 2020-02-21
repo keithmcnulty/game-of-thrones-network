@@ -16,7 +16,7 @@ var simulation = d3.forceSimulation()
 var container = svg.append('g');
 
 // Create form for search (see function below).
-var search = d3.select("body").append('form').attr('onsubmit', 'return false;');
+var search = d3.select("body").append('center').append('form').attr('onsubmit', 'return false;');
 
 var box = search.append('input')
 	.attr('type', 'text')
@@ -25,7 +25,7 @@ var box = search.append('input')
 
 var button = search.append('input')
 	.attr('type', 'button')
-	.attr('value', 'Search')
+    .attr('value', 'Search')
     .on('click', function () { searchNodes(); });
 
 // Toggle for ego networks on click (below).
@@ -131,11 +131,12 @@ node.append("title")
 
 
   	// A slider that removes nodes below the input threshold.
-	var slider = d3.select('body').append('p').text('Edge Weight Threshold: ');
+	var slider = d3.select('body').append('p').append('center').text('Minimum number of scenes for connection: ').style('font-size', '60%');
 
 	slider.append('label')
 		.attr('for', 'threshold')
-		.text('1');
+        .text('1').style('font-weight', 'bold')
+        .style('font-size', '120%');
 	slider.append('input')
 		.attr('type', 'range')
 		.attr('min', d3.min(graph.links, function(d) {return d.weight; }))
@@ -173,26 +174,6 @@ node.append("title")
 
 		});
 
-	// A dropdown menu with three different centrality measures, calculated in R igraph.
-	// Accounts for node collision.
-	var dropdown = d3.select('body').append('div')
-		.append('select')
-		.on('change', function() { 
-			var centrality = this.value;
-			var centralitySize = d3.scaleLinear()
-				.domain([d3.min(graph.nodes, function(d) { return d[centrality]; }), d3.max(graph.nodes, function(d) { return d[centrality]; })])
-				.range([8,25]);
-			node.attr('r', function(d) { return centralitySize(d[centrality]); } );  
-			// Recalculate collision detection based on selected centrality.
-			simulation.force("collide", d3.forceCollide().radius( function (d) { return centralitySize(d[centrality]); }));
-			simulation.alphaTarget(0.1).restart();
-		});
-
-	dropdown.selectAll('option')
-		.data(['Degree Centrality', 'Betweenness Centrality', 'Eigenvector Centrality'])
-		.enter().append('option')
-		.attr('value', function(d) { return d.split(' ')[0].toLowerCase(); })
-        .text(function(d) { return d; });   
     
     // add a legend
     var legend = d3.select("#legend")
@@ -261,8 +242,9 @@ node.append("title")
         node.filter(x => x.name === d.groupName)
             .append("circle")
             .attr('r', d => 0.9 * degreeSize(d.degree))
-            .attr('fill', d => 'url(#image-' + d.name + ')')
-
+            .attr('fill', d => 'url(#image-' + d.name + ')');
+        
+            
         })
     });
 
