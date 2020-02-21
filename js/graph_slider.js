@@ -225,6 +225,8 @@ node.append("title")
         }
     }
 
+    console.log(legendNames);
+
     legend.append("text")
         .data(color.domain())
         .attr("x", 24)
@@ -235,7 +237,7 @@ node.append("title")
         })
         .style('font-size', 10);
 
-    var photos = legendNames.filter(x => x.groupName !== 'BLACK_JACK' && x.groupName !== 'BALON_DWARF');
+    var photos = legendNames.filter(x => x.groupName !== 'THE FIVE DWARFS' && x.groupName !== 'BLACK JACK, KEGS & MULLY');
 
     console.log(photos);
 
