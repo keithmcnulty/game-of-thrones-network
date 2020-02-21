@@ -198,7 +198,7 @@ node.append("title")
     var legend = d3.select("#legend")
         .append("svg")
         .attr("class", "legend")
-        .attr("width", 140)
+        .attr("width", 180)
         .attr("height", 200)
         .selectAll("g")
         .data(color.domain())
@@ -213,6 +213,7 @@ node.append("title")
         .attr("height", 18)
         .style("fill", color);
     
+    // load legend names from data_label column
     var legendNames = [];
     var map = new Map();
     for (var item of graph.nodes) {
@@ -220,13 +221,12 @@ node.append("title")
             map.set(item.group, true);    // set any value to Map
             legendNames.push({
                 id: item.group,
-                groupName: item.legend_label
+                groupName: item.data_label
             });
         }
     }
 
-    console.log(legendNames);
-
+    // append text to legends
     legend.append("text")
         .data(color.domain())
         .attr("x", 24)
@@ -237,9 +237,8 @@ node.append("title")
         })
         .style('font-size', 10);
 
+    // add photos to all legend names except two
     var photos = legendNames.filter(x => x.groupName !== 'THE FIVE DWARFS' && x.groupName !== 'BLACK JACK, KEGS & MULLY');
-
-    console.log(photos);
 
     var imgPath = 'https://keithmcnulty.github.io/game-of-thrones-network/img/'
     
