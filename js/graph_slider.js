@@ -218,34 +218,7 @@ node.append("title")
         })
         .style('font-size', 10);
 
-    // add photos to all legend names except two
-    var photos = legendNames.filter(x => x.groupName !== 'THE FIVE DWARFS' && x.groupName !== 'BLACK JACK, KEGS & MULLY');
 
-    var imgPath = 'https://keithmcnulty.github.io/game-of-thrones-network/img/'
-    
-   photos.forEach(d => {
-
-        node.filter(x => x.name === d.groupName)
-            .append("defs")
-            .append("pattern")
-            .attr('id', d => 'image-' + d.name)
-            .attr('patternUnits', 'userSpaceOnUse')
-            .attr('x', d => -degreeSize(d.degree))
-            .attr('y', d => -degreeSize(d.degree))
-            .attr('height', d => degreeSize(d.degree) * 2)
-            .attr('width', d => degreeSize(d.degree) * 2)
-            .append("image")
-            .attr('height', d => degreeSize(d.degree) * 2)
-            .attr('width', d => degreeSize(d.degree) * 2)
-            .attr('xlink:href', d => imgPath + d.name.toLowerCase() + '.png');
-        
-        node.filter(x => x.name === d.groupName)
-            .append("circle")
-            .attr('r', d => 0.9 * degreeSize(d.degree))
-            .attr('fill', d => 'url(#image-' + d.name + ')');
-        
-            
-        })
     });
 
 function dragstarted(d) {
