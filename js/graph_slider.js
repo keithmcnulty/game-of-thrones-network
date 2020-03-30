@@ -31,7 +31,7 @@ var button = search.append('input')
 // Toggle for ego networks on click (below).
 var toggle = 0;
 
-var dataPath = "https://keithmcnulty.github.io/game-of-thrones-network/json/got_network.json"
+var dataPath = "https://github.com/jcopleyaxiom/Axiom-network/json/axiom_network.json"
 
 d3.json(dataPath, function(error, graph) {
   if (error) throw error;
